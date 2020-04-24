@@ -14,10 +14,10 @@ import java.util.Collections;
 
 public class VoyageAdderActivity extends AppCompatActivity {
 
+    private ArrayList<Object> objects = new ArrayList<>();
     private EditText nameEdit;
     private EditText weightEdit;
     private EditText costEdit;
-    private ArrayList<Object> objects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,9 @@ public class VoyageAdderActivity extends AppCompatActivity {
 
     public void onAddClick(View view) {
         if (nameEdit.getText().toString().equals("") || weightEdit.getText().toString().equals("") || costEdit.getText().toString().equals("")) {
-            openWarning("Ни одно поле не должно быть пустым!");
+            openWarning(getResources().getString(R.string.not_blank));
         } else if (Integer.parseInt(weightEdit.getText().toString()) > 30) {
-            openWarning(WelcomeActivity.currentUser + ", такой тяжелый груз не влезет!");
+            openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.too_much_weight));
         } else {
             try {
                 objects.add(new Object(nameEdit.getText().toString(), Integer.parseInt(weightEdit.getText().toString()), Integer.parseInt(costEdit.getText().toString())));
@@ -41,7 +41,7 @@ public class VoyageAdderActivity extends AppCompatActivity {
                 weightEdit.setText("");
                 costEdit.setText("");
             } catch (NumberFormatException exception) {
-                openWarning(WelcomeActivity.currentUser + ", похоже вы ввели некорректные данные!");
+                openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.incorrect_data));
             }
         }
     }
@@ -84,7 +84,7 @@ public class VoyageAdderActivity extends AppCompatActivity {
         }
 
         if (table[count][maxWeight] < 500) {
-            openWarning("Слишком маленькая прибыль, может поискать товар повыгоднее?");
+            openWarning(getResources().getString(R.string.small_profit));
         } else {
             WelcomeActivity.currentProfit = table[count][maxWeight];
 
@@ -101,10 +101,9 @@ public class VoyageAdderActivity extends AppCompatActivity {
                 resultObjects.add(new Object(objects.get(objectIds.get(i) - 1).getName(), objects.get(objectIds.get(i) - 1).getWeight(), objects.get(objectIds.get(i) - 1).getCost()));
             }
 
-            objects = resultObjects;
+            WelcomeActivity.currentObjects = resultObjects;
 
             Intent intent = new Intent(this, VoyageResultActivity.class);
-            intent.putExtra("OBJECTS", objects);
             startActivity(intent);
         }
     }

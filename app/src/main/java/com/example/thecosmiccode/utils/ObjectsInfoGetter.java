@@ -44,4 +44,14 @@ public class ObjectsInfoGetter {
 
         return objectCosts.toString();
     }
+
+    public int getProfit() {
+        int profit = 0;
+
+        for (int i = 0; i < voyage.getObjects().size(); i++) {
+            profit += voyage.getObjects().get(i).getCost();
+        }
+
+        return profit;
+    }
 }

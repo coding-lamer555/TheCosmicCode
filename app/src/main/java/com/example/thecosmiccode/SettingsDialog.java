@@ -2,10 +2,12 @@ package com.example.thecosmiccode;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,11 +23,13 @@ import com.example.thecosmiccode.model.Voyage;
 
 import java.util.ArrayList;
 
+import static com.example.thecosmiccode.WelcomeActivity.player;
+
 public class SettingsDialog {
+
     private Context context;
     private ViewGroup root;
     private Animation fadeInAnimation, fadeOutAnimation;
-    private String[] users;
 
     public SettingsDialog(Context context, ViewGroup root) {
         this.context = context;
@@ -36,14 +40,13 @@ public class SettingsDialog {
     }
 
     private void inflate() {
-        final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_settings, root, false);
-        addedView.startAnimation(fadeInAnimation);
+        final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_settings_dialog, root, false);
         final ImageButton infoButton = root.findViewById(R.id.infoButton);
         infoButton.setOnClickListener(null);
         final ImageButton settingsButton = root.findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(null);
 
-        final Spinner spinner = addedView.findViewById(R.id.spinner);
+        final Spinner userSpinner = addedView.findViewById(R.id.userSpinner);
         ArrayList<String> usersList = new ArrayList<>();
         final String newUser = context.getResources().getString(R.string.new_user);
         usersList.add(newUser);
@@ -60,31 +63,29 @@ public class SettingsDialog {
                 }
             }
         }
+        String[] users = usersList.toArray(new String[0]);
+        SpinnerAdapter userAdapter = new SpinnerAdapter(context, R.layout.spinner_item, users);
+        userSpinner.setAdapter(userAdapter);
+        userSpinner.setSelection(currentUserSpinnerIndex, true);
 
         Button changeUser = addedView.findViewById(R.id.changeUser);
         changeUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String selected = spinner.getSelectedItem().toString();
+                String selected = userSpinner.getSelectedItem().toString();
                 if (selected.equals(newUser)) {
                     WelcomeActivity.currentUser = null;
-                    if (spinner.getCount() > 1) {
-                        Toast.makeText(context, "Будет создан новый пользователь", Toast.LENGTH_SHORT).show();
+                    if (userSpinner.getCount() > 1) {
+                        Toast.makeText(context, R.string.create_new_user, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "Нет ни одного пользователя, будет создан новый", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.no_user, Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     WelcomeActivity.currentUser = selected;
-                    Toast.makeText(context, "Выбран пользователь: " + WelcomeActivity.currentUser, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.chosen_user) + " " + WelcomeActivity.currentUser, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        users = usersList.toArray(new String[0]);
-        CustomAdapter adapter = new CustomAdapter(context, R.layout.spinner_item, users);
-        spinner.setAdapter(adapter);
-        spinner.setPromptId(R.string.change);
-        spinner.setSelection(currentUserSpinnerIndex, true);
 
         Button dropDB = addedView.findViewById(R.id.dropDB);
         dropDB.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +93,56 @@ public class SettingsDialog {
             public void onClick(View v) {
                 WelcomeActivity.dbConnector.deleteAll();
                 WelcomeActivity.currentUser = null;
-                spinner.setAdapter(new CustomAdapter(context, R.layout.spinner_item, new String[]{newUser}));
-                Toast.makeText(context, "Данные всех пользователей удалены!", Toast.LENGTH_SHORT).show();
+                userSpinner.setAdapter(new SpinnerAdapter(context, R.layout.spinner_item, new String[]{newUser}));
+                Toast.makeText(context, R.string.deleted_data, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Spinner musicSpinner = addedView.findViewById(R.id.musicSpinner);
+        String[] musicTitles = new String[]{
+                "awake_and_alive",
+                "beautiful_mess",
+                "bulletproof",
+                "chasing_the_horizon",
+                "earthlings",
+                "i_don’t_know_where_we_are",
+                "into_the_night",
+                "nights_out",
+                "the_legend_about_death_god",
+                "toxic_city",
+                "undertale_ruins",
+                "words_from_a_book"
+        };
+        final int[] musicIds = new int[]{
+                R.raw.awake_and_alive,
+                R.raw.beautiful_mess,
+                R.raw.bulletproof,
+                R.raw.chasing_the_horizon,
+                R.raw.earthlings,
+                R.raw.i_dont_know_where_we_are,
+                R.raw.into_the_night,
+                R.raw.nights_out,
+                R.raw.the_legend_about_death_god,
+                R.raw.toxic_city,
+                R.raw.undertale_ruins,
+                R.raw.words_from_a_book
+        };
+        SpinnerAdapter musicAdapter = new SpinnerAdapter(context, R.layout.spinner_item, musicTitles);
+        musicSpinner.setAdapter(musicAdapter);
+        musicSpinner.setSelection(WelcomeActivity.currentMusicSpinnerIndex, true);
+        musicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                WelcomeActivity.currentMusicSpinnerIndex = position;
+                player.stop();
+                player = MediaPlayer.create(context, musicIds[position]);
+                player.setLooping(true);
+                player.start();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -102,16 +151,14 @@ public class SettingsDialog {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    WelcomeActivity.player.pause();
+                    player.pause();
                     Toast.makeText(context, ":(", Toast.LENGTH_SHORT).show();
                 } else {
-                    WelcomeActivity.player.start();
+                    player.start();
                     Toast.makeText(context, ":)", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        root.addView(addedView);
 
         ImageButton close = addedView.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
@@ -133,12 +180,27 @@ public class SettingsDialog {
                 root.removeView(addedView);
             }
         });
+
+        ImageButton quit = addedView.findViewById(R.id.quit);
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                //((Activity) context).finish();
+            }
+        });
+
+        addedView.startAnimation(fadeInAnimation);
+        root.addView(addedView);
     }
 
-    public class CustomAdapter extends ArrayAdapter<String> {
+    public class SpinnerAdapter extends ArrayAdapter<String> {
 
-        public CustomAdapter(Context context, int textViewResourceId, String[] objects) {
+        private String[] objects;
+
+        public SpinnerAdapter(Context context, int textViewResourceId, String[] objects) {
             super(context, textViewResourceId, objects);
+            this.objects = objects;
         }
 
         @Override
@@ -155,7 +217,7 @@ public class SettingsDialog {
         public View getCustomView(int position, View convertView, ViewGroup parent) {
             View row = ((Activity) context).getLayoutInflater().inflate(R.layout.spinner_item, parent, false);
             TextView label = row.findViewById(R.id.spinnerText);
-            label.setText(users[position]);
+            label.setText(objects[position]);
             return row;
         }
     }

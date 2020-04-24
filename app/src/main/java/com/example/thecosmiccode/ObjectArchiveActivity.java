@@ -3,6 +3,7 @@ package com.example.thecosmiccode;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ public class ObjectArchiveActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ObjectRVAdapter adapter;
+    private ScrollView scrollView;
     private ConstraintLayout topLayout;
     private ConstraintLayout recyclerViewLayout;
     private ConstraintLayout bottomLayout;
@@ -29,11 +31,18 @@ public class ObjectArchiveActivity extends AppCompatActivity {
 
         voyage = (Voyage) getIntent().getSerializableExtra("VOYAGE");
 
+        scrollView = findViewById(R.id.scrollView);
         topLayout = findViewById(R.id.top_layout);
         recyclerViewLayout = findViewById(R.id.rv_layout);
         bottomLayout = findViewById(R.id.bottom_layout);
         recyclerView = findViewById(R.id.recycler_view);
         result = findViewById(R.id.result);
+
+        scrollView.postDelayed(new Runnable() {
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_UP);
+            }
+        }, 0);
 
         String resultText = "Рейс «" + voyage.getName() + "», как это было:";
         result.setText(resultText);

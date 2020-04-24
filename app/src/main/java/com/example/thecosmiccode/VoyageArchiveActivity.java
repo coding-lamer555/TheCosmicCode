@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 public class VoyageArchiveActivity extends AppCompatActivity {
 
+    private ArrayList<Voyage> voyages;
     private RecyclerView recyclerView;
     private VoyageRVAdapter adapter;
     private ConstraintLayout topLayout;
     private ConstraintLayout recyclerViewLayout;
     private ConstraintLayout bottomLayout;
-    private ArrayList<Voyage> voyages;
     private TextView result;
 
     @Override

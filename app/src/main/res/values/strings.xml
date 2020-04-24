@@ -7,7 +7,7 @@
     <string name="description2">Данное приложение поможет вам рассчитать оптимальную загрузку корабля и максимальную прибыль от миссии.</string>
     <string name="enter_name">Введите ваше имя:</string>
     <string name="invalid_name">Имя не может быть пустым!</string>
-    <string name="voyage_info">Имя, в вашем распоряжении: новейший корабль с грузоподъемностью 30 тонн и самая профессиональная команда, которая откажется работать, если планируемый доход меньше 500 красных камней.</string>
+    <string name="voyage_info">, в вашем распоряжении: новейший корабль с грузоподъемностью 30 тонн и самая профессиональная команда, которая откажется работать, если планируемый доход меньше 500 красных камней.</string>
     <string name="voyage_new">Новый рейс</string>
     <string name="voyage_archive">Архив</string>
     <string name="voyage_name">Название:</string>
@@ -27,4 +27,14 @@
     <string name="mute">Отключить\nмузычку</string>
     <string name="user_voyages">Рейсы пользователя</string>
     <string name="new_user">Создаем нового…</string>
+    <string name="create_new_user">Будет создан новый пользователь</string>
+    <string name="no_user">Нет ни одного пользователя, будет создан новый</string>
+    <string name="chosen_user">Выбран пользователь:</string>
+    <string name="deleted_data">Данные всех пользователей удалены!</string>
+    <string name="not_blank">Ни одно поле не должно быть пустым!</string>
+    <string name="too_much_weight">, такой тяжелый груз не влезет!</string>
+    <string name="incorrect_data">, похоже вы ввели некорректные данные!</string>
+    <string name="small_profit">Слишком маленькая прибыль, может поискать товар повыгоднее?</string>
+    <string name="not_blank_voyage">Название (номер) рейса не может быть пустым!</string>
+    <string name="change_music">Муз. фон:</string>
 </resources>

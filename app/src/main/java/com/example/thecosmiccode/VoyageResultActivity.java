@@ -5,6 +5,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,34 +13,35 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thecosmiccode.model.Object;
-
-import java.util.ArrayList;
-
 public class VoyageResultActivity extends AppCompatActivity {
 
+    private ScrollView scrollView;
     private RecyclerView recyclerView;
     private ObjectRVAdapter adapter;
     private ConstraintLayout topLayout;
     private ConstraintLayout recyclerViewLayout;
     private ConstraintLayout bottomLayout;
     private TextView result;
-    private ArrayList<Object> objects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voyage_result);
 
-        objects = (ArrayList<Object>) getIntent().getSerializableExtra("OBJECTS");
-
+        scrollView = findViewById(R.id.scrollView);
         topLayout = findViewById(R.id.top_layout);
         recyclerViewLayout = findViewById(R.id.rv_layout);
         bottomLayout = findViewById(R.id.bottom_layout);
         recyclerView = findViewById(R.id.recycler_view);
         result = findViewById(R.id.result);
 
-        String resultInfo = (String) getResources().getText(R.string.voyage_result);
+        scrollView.postDelayed(new Runnable() {
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_UP);
+            }
+        }, 0);
+
+        String resultInfo = getResources().getString(R.string.voyage_result);
         StringBuilder stringBuilder = new StringBuilder(resultInfo);
         stringBuilder.insert(13, " (" + WelcomeActivity.currentProfit + ")");
         result.setText(stringBuilder.toString());
@@ -55,12 +57,11 @@ public class VoyageResultActivity extends AppCompatActivity {
     }
 
     private void initializeData() {
-        objects = new ArrayList<>();
-        //
+
     }
 
     private void initializeAdapter() {
-        adapter = new ObjectRVAdapter(objects);
+        adapter = new ObjectRVAdapter(WelcomeActivity.currentObjects);
         recyclerView.setAdapter(adapter);
     }
 
@@ -85,13 +86,12 @@ public class VoyageResultActivity extends AppCompatActivity {
     }
 
     public void onGoBeginClick(View view) {
-        Intent intent = new Intent(this, WelcomeActivity.class);
+        Intent intent = new Intent(this, VoyageWorkerActivity.class);
         startActivity(intent);
     }
 
     public void onSaveClick(View view) {
         Intent intent = new Intent(this, VoyageSavingActivity.class);
-        intent.putExtra("OBJECTS", objects);
         startActivity(intent);
     }
 }

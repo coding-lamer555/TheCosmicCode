@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.thecosmiccode.model.Voyage;
+import com.example.thecosmiccode.utils.ObjectsInfoGetter;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,7 @@ public class VoyageRVAdapter extends RecyclerView.Adapter<VoyageRVAdapter.Voyage
         Voyage voyage = voyages.get(position);
         holder.currentVoyage = voyage;
         holder.voyageName.setText(voyage.getName());
+        holder.cost.setText(String.valueOf(new ObjectsInfoGetter(voyage).getProfit()));
     }
 
     @Override
@@ -53,11 +55,13 @@ public class VoyageRVAdapter extends RecyclerView.Adapter<VoyageRVAdapter.Voyage
 
         Voyage currentVoyage;
         TextView voyageName;
+        TextView cost;
 
         VoyageViewHolder(View itemView, final Context context) {
             super(itemView);
 
             voyageName = itemView.findViewById(R.id.voyageName);
+            cost = itemView.findViewById(R.id.cost);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -3,20 +3,25 @@ package com.example.thecosmiccode;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.thecosmiccode.model.Object;
+import com.example.thecosmiccode.model.Voyage;
 import com.example.thecosmiccode.utils.DBVoyages;
+
+import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    public static MediaPlayer player;
     public static DBVoyages dbConnector;
     public static String currentUser;
+    public static ArrayList<Object> currentObjects = new ArrayList<>();
     public static int currentProfit;
+    public static MediaPlayer player;
+    public static int currentMusicSpinnerIndex = 10;
     private ConstraintLayout welcome;
 
     @Override
@@ -30,7 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
             player.stop();
             player = null;
         }
-        player = MediaPlayer.create(this, R.raw.music);
+        player = MediaPlayer.create(this, R.raw.undertale_ruins);
         player.setLooping(true);
         player.start();
 

@@ -17,7 +17,8 @@ public class VoyageWorkerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_voyage_worker);
 
         enterName = findViewById(R.id.enterName);
-        enterName.setText(getResources().getString(R.string.voyage_info).replace("Имя", WelcomeActivity.currentUser));
+        String enterNameText = WelcomeActivity.currentUser + getResources().getString(R.string.voyage_info);
+        enterName.setText(enterNameText);
     }
 
     public void onVoyageNewClick(View view) {

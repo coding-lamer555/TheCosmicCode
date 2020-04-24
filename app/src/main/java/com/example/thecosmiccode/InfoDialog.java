@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import com.example.thecosmiccode.utils.AnimatedTextView;
 
 public class InfoDialog {
+
     private Context context;
     private ViewGroup root;
     private Animation fadeInAnimation, fadeOutAnimation;
@@ -24,13 +25,11 @@ public class InfoDialog {
     }
 
     private void inflate() {
-        final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_info, root, false);
-        addedView.startAnimation(fadeInAnimation);
+        final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_info_dialog, root, false);
         final ImageButton infoButton = root.findViewById(R.id.infoButton);
         infoButton.setOnClickListener(null);
         final ImageButton settingsButton = root.findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(null);
-        root.addView(addedView);
 
         ImageButton close = root.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
@@ -57,5 +56,8 @@ public class InfoDialog {
         info.setDuration(3000);
         info.setIsVisible(false);
         info.toggle();
+
+        addedView.startAnimation(fadeInAnimation);
+        root.addView(addedView);
     }
 }
