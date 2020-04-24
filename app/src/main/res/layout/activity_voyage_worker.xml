@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back3"
+    tools:context=".VoyageWorkerActivity">
+
+    <TextView
+        android:id="@+id/enterName"
+        style="@style/DescriptionText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/back"
+        style="@style/Button"
+        android:layout_marginBottom="16dp"
+        android:onClick="onGoBeginClick"
+        android:text="@string/go_begin"
+        app:layout_constraintBottom_toTopOf="@id/voyageNew"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/voyageNew"
+        style="@style/Button"
+        android:layout_marginBottom="16dp"
+        android:onClick="onVoyageNewClick"
+        android:text="@string/voyage_new"
+        app:layout_constraintBottom_toTopOf="@id/voyageArchive"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/voyageArchive"
+        style="@style/Button"
+        android:onClick="onVoyageArchiveClick"
+        android:text="@string/voyage_archive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

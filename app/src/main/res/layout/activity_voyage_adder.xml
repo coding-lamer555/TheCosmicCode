@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VoyageAdderActivity">
+
+    <TextView
+        android:id="@+id/enterName"
+        style="@style/DescriptionText"
+        android:text="@string/voyage_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nameEdit"
+        style="@style/EditTextObject"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterName" />
+
+    <TextView
+        android:id="@+id/enterWeight"
+        style="@style/DescriptionText"
+        android:text="@string/voyage_weight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameEdit" />
+
+    <EditText
+        android:id="@+id/weightEdit"
+        style="@style/EditTextObject"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterWeight" />
+
+    <TextView
+        android:id="@+id/enterCost"
+        style="@style/DescriptionText"
+        android:text="@string/voyage_cost"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weightEdit" />
+
+    <EditText
+        android:id="@+id/costEdit"
+        style="@style/EditTextObject"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterCost" />
+
+    <Button
+        android:id="@+id/add"
+        style="@style/Button"
+        android:layout_marginBottom="16dp"
+        android:onClick="onAddClick"
+        android:text="@string/add"
+        app:layout_constraintBottom_toTopOf="@id/calculate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/calculate"
+        style="@style/Button"
+        android:onClick="onCalculateClick"
+        android:text="@string/calculate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

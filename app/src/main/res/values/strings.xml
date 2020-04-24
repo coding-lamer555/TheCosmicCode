@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Красные камни</string>
+    <string name="title">Красные\nкамни</string>
+    <string name="begin">Начать!</string>
+    <string name="next">Далее</string>
+    <string name="description">После успешной колонизации Марса, земляне установили тесный контакт с марсианами. Марс богат полезными ископаемыми, однако местные жители в них не заинтересованы. Заключив соглашение с людьми, марсиане готовы обменивать земные предметы и продукты на красные камни. Красные камни — новый вид полупроводников, они очень важны для землян.</string>
+    <string name="description2">Данное приложение поможет вам рассчитать оптимальную загрузку корабля и максимальную прибыль от миссии.</string>
+    <string name="enter_name">Введите ваше имя:</string>
+    <string name="invalid_name">Имя не может быть пустым!</string>
+    <string name="voyage_info">Имя, в вашем распоряжении: новейший корабль с грузоподъемностью 30 тонн и самая профессиональная команда, которая откажется работать, если планируемый доход меньше 500 красных камней.</string>
+    <string name="voyage_new">Новый рейс</string>
+    <string name="voyage_archive">Архив</string>
+    <string name="voyage_name">Название:</string>
+    <string name="voyage_weight">Вес (в тоннах):</string>
+    <string name="voyage_cost">Стоимость:</string>
+    <string name="add">Добавить</string>
+    <string name="calculate">Рассчитать</string>
+    <string name="back">Назад</string>
+    <string name="voyage_result">Макс. прибыль вам принесут данные товары:</string>
+    <string name="go_begin">В начало</string>
+    <string name="save_voyage">Сохранить</string>
+    <string name="saving_description">Введите название или номер вашего рейса:</string>
+    <string name="info">Над данным приложением работала команда Lamers:\n\nПроскурина\nСофья\n\nТерещенко\nСергей\n\nСвиридов\nДанил</string>
+    <string name="change_user">Сменить\nпользователя:</string>
+    <string name="change">Сменить</string>
+    <string name="drop_db">Удалить все данные</string>
+    <string name="mute">Отключить\nмузычку</string>
+    <string name="user_voyages">Рейсы пользователя</string>
+    <string name="new_user">Создаем нового…</string>
+</resources>
