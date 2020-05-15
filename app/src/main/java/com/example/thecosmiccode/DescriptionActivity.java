@@ -25,7 +25,6 @@ public class DescriptionActivity extends AppCompatActivity {
         description.setDuration(3000);
         description.setIsVisible(false);
         description.toggle();
-        //description.setMovementMethod(new ScrollingMovementMethod());
     }
 
     public void onNextClick(View view) {
@@ -38,6 +37,7 @@ public class DescriptionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(DescriptionActivity.this, EnterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
             }
         });
     }

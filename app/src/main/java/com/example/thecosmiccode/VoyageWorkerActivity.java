@@ -24,15 +24,18 @@ public class VoyageWorkerActivity extends AppCompatActivity {
     public void onVoyageNewClick(View view) {
         Intent intent = new Intent(this, VoyageAdderActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
     public void onVoyageArchiveClick(View view) {
         Intent intent = new Intent(this, VoyageArchiveActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
     public void onGoBeginClick(View view) {
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.top_in, R.anim.bottom_out);
     }
 }

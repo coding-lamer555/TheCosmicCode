@@ -23,5 +23,6 @@ public class VoyageWarningActivity extends AppCompatActivity {
     public void onBackClick(View view) {
         Intent intent = new Intent(this, VoyageAdderActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.top_in, R.anim.bottom_out);
     }
 }

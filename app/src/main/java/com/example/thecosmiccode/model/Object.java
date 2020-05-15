@@ -24,13 +24,4 @@ public class Object implements Serializable {
     public int getCost() {
         return cost;
     }
-
-    @Override
-    public String toString() {
-        return "Object{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", cost=" + cost +
-                '}';
-    }
 }

@@ -31,6 +31,7 @@ public class EnterActivity extends AppCompatActivity {
             WelcomeActivity.currentUser = nameEdit.getText().toString();
             Intent intent = new Intent(this, VoyageWorkerActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
         }
     }
 }

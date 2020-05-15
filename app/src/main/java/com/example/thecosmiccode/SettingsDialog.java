@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.thecosmiccode.model.Voyage;
 
@@ -41,6 +42,10 @@ public class SettingsDialog {
 
     private void inflate() {
         final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_settings_dialog, root, false);
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) addedView.getLayoutParams();
+        params.topToTop = root.getId();
+        params.bottomToBottom = root.getId();
+        addedView.setLayoutParams(params);
         final ImageButton infoButton = root.findViewById(R.id.infoButton);
         infoButton.setOnClickListener(null);
         final ImageButton settingsButton = root.findViewById(R.id.settingsButton);
@@ -58,7 +63,7 @@ public class SettingsDialog {
                 if (usersList.indexOf(name) == -1) {
                     usersList.add(name);
                     if (name.equals(WelcomeActivity.currentUser)) {
-                        currentUserSpinnerIndex = usersList.indexOf(name) + 1;
+                        currentUserSpinnerIndex = usersList.indexOf(name);
                     }
                 }
             }
@@ -67,11 +72,9 @@ public class SettingsDialog {
         SpinnerAdapter userAdapter = new SpinnerAdapter(context, R.layout.spinner_item, users);
         userSpinner.setAdapter(userAdapter);
         userSpinner.setSelection(currentUserSpinnerIndex, true);
-
-        Button changeUser = addedView.findViewById(R.id.changeUser);
-        changeUser.setOnClickListener(new View.OnClickListener() {
+        userSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selected = userSpinner.getSelectedItem().toString();
                 if (selected.equals(newUser)) {
                     WelcomeActivity.currentUser = null;
@@ -84,6 +87,11 @@ public class SettingsDialog {
                     WelcomeActivity.currentUser = selected;
                     Toast.makeText(context, context.getResources().getString(R.string.chosen_user) + " " + WelcomeActivity.currentUser, Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -100,30 +108,18 @@ public class SettingsDialog {
 
         Spinner musicSpinner = addedView.findViewById(R.id.musicSpinner);
         String[] musicTitles = new String[]{
-                "awake_and_alive",
                 "beautiful_mess",
-                "bulletproof",
-                "chasing_the_horizon",
                 "earthlings",
-                "i_don’t_know_where_we_are",
-                "into_the_night",
                 "nights_out",
                 "the_legend_about_death_god",
-                "toxic_city",
                 "undertale_ruins",
                 "words_from_a_book"
         };
         final int[] musicIds = new int[]{
-                R.raw.awake_and_alive,
                 R.raw.beautiful_mess,
-                R.raw.bulletproof,
-                R.raw.chasing_the_horizon,
                 R.raw.earthlings,
-                R.raw.i_dont_know_where_we_are,
-                R.raw.into_the_night,
                 R.raw.nights_out,
                 R.raw.the_legend_about_death_god,
-                R.raw.toxic_city,
                 R.raw.undertale_ruins,
                 R.raw.words_from_a_book
         };
@@ -185,8 +181,7 @@ public class SettingsDialog {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.os.Process.killProcess(android.os.Process.myPid());
-                //((Activity) context).finish();
+                ((Activity) context).finish();
             }
         });
 

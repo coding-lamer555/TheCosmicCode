@@ -38,11 +38,6 @@ public class ObjectRVAdapter extends RecyclerView.Adapter<ObjectRVAdapter.Object
     public void onBindViewHolder(ObjectViewHolder holder, int position) {
         Object object = objects.get(position);
 
-        for (int i = 0; i < objects.size(); i++) {
-            System.out.println("OBJECT\n");
-            System.out.println(objects.get(i));
-        }
-
         int[] pictures = new int[]{R.drawable.picture1,
                 R.drawable.picture2,
                 R.drawable.picture3,

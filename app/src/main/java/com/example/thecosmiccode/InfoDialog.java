@@ -8,6 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.thecosmiccode.utils.AnimatedTextView;
 
 public class InfoDialog {
@@ -26,12 +28,16 @@ public class InfoDialog {
 
     private void inflate() {
         final View addedView = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_info_dialog, root, false);
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) addedView.getLayoutParams();
+        params.topToTop = root.getId();
+        params.bottomToBottom = root.getId();
+        addedView.setLayoutParams(params);
         final ImageButton infoButton = root.findViewById(R.id.infoButton);
         infoButton.setOnClickListener(null);
         final ImageButton settingsButton = root.findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(null);
 
-        ImageButton close = root.findViewById(R.id.close);
+        ImageButton close = addedView.findViewById(R.id.close);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +58,7 @@ public class InfoDialog {
             }
         });
 
-        AnimatedTextView info = root.findViewById(R.id.info);
+        AnimatedTextView info = addedView.findViewById(R.id.info);
         info.setDuration(3000);
         info.setIsVisible(false);
         info.toggle();

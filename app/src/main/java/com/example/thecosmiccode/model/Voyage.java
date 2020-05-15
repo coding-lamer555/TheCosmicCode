@@ -31,14 +31,4 @@ public class Voyage implements Serializable {
     public ArrayList<Object> getObjects() {
         return objects;
     }
-
-    @Override
-    public String toString() {
-        return "Voyage{" +
-                "id=" + id +
-                ", user='" + user + '\'' +
-                ", name='" + name + '\'' +
-                ", objects=" + objects +
-                '}';
-    }
 }

@@ -59,5 +59,6 @@ public class VoyageArchiveActivity extends AppCompatActivity {
     public void onBackClick(View view) {
         Intent intent = new Intent(this, VoyageWorkerActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 }

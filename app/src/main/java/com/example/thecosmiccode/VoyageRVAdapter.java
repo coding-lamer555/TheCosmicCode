@@ -1,5 +1,6 @@
 package com.example.thecosmiccode;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -68,6 +69,7 @@ public class VoyageRVAdapter extends RecyclerView.Adapter<VoyageRVAdapter.Voyage
                     Intent intent = new Intent(context, ObjectArchiveActivity.class);
                     intent.putExtra("VOYAGE", currentVoyage);
                     context.startActivity(intent);
+                    ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
                 }
             });
         }

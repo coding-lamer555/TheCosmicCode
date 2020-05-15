@@ -34,6 +34,7 @@ public class VoyageSavingActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, VoyageWorkerActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.left_in, R.anim.right_out);
         }
     }
 }

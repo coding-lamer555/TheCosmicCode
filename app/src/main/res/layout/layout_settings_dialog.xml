@@ -2,11 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="32dp"
-    android:layout_marginTop="64dp"
     android:layout_marginRight="32dp"
-    android:layout_marginBottom="64dp"
     android:background="@drawable/back_text_button">
 
     <ImageButton
@@ -40,18 +38,6 @@
         app:layout_constraintTop_toBottomOf="@id/chooseUser" />
 
     <Button
-        android:id="@+id/changeUser"
-        style="@style/Button"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/change"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userSpinner" />
-
-    <Button
         android:id="@+id/dropDB"
         style="@style/Button"
         android:layout_width="match_parent"
@@ -61,7 +47,7 @@
         android:text="@string/drop_db"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/changeUser" />
+        app:layout_constraintTop_toBottomOf="@id/userSpinner" />
 
     <TextView
         android:id="@+id/chooseMusic"
@@ -69,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginRight="16dp"
         android:text="@string/change_music"
         app:layout_constraintTop_toBottomOf="@id/dropDB" />
@@ -91,9 +77,11 @@
         android:layout_width="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="44dp"
         android:buttonTint="@color/white"
         android:text="@string/mute"
         app:buttonTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/musicSpinner" />
 

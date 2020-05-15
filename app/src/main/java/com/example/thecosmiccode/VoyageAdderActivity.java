@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.thecosmiccode.model.Object;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class VoyageAdderActivity extends AppCompatActivity {
 
@@ -32,14 +31,20 @@ public class VoyageAdderActivity extends AppCompatActivity {
     public void onAddClick(View view) {
         if (nameEdit.getText().toString().equals("") || weightEdit.getText().toString().equals("") || costEdit.getText().toString().equals("")) {
             openWarning(getResources().getString(R.string.not_blank));
-        } else if (Integer.parseInt(weightEdit.getText().toString()) > 30) {
-            openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.too_much_weight));
         } else {
             try {
-                objects.add(new Object(nameEdit.getText().toString(), Integer.parseInt(weightEdit.getText().toString()), Integer.parseInt(costEdit.getText().toString())));
-                nameEdit.setText("");
-                weightEdit.setText("");
-                costEdit.setText("");
+                if (Integer.parseInt(weightEdit.getText().toString()) < 1 || Integer.parseInt(costEdit.getText().toString()) < 1) {
+                    openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.incorrect_data));
+                } else if (Integer.parseInt(weightEdit.getText().toString()) > 30) {
+                    openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.too_much_weight));
+                } else if (Integer.parseInt(costEdit.getText().toString()) > 99999) {
+                    openWarning(getResources().getString(R.string.too_much_cost));
+                } else {
+                    objects.add(new Object(nameEdit.getText().toString(), Integer.parseInt(weightEdit.getText().toString()), Integer.parseInt(costEdit.getText().toString())));
+                    nameEdit.setText("");
+                    weightEdit.setText("");
+                    costEdit.setText("");
+                }
             } catch (NumberFormatException exception) {
                 openWarning(WelcomeActivity.currentUser + getResources().getString(R.string.incorrect_data));
             }
@@ -47,16 +52,21 @@ public class VoyageAdderActivity extends AppCompatActivity {
     }
 
     public void onCalculateClick(View view) {
-        calc();
+        if (objects.size() != 0) {
+            calc();
+        } else {
+            openWarning(getResources().getString(R.string.no_object));
+        }
     }
 
     public void openWarning(String warning) {
         Intent intent = new Intent(this, VoyageWarningActivity.class);
         intent.putExtra("WARNING", warning);
         startActivity(intent);
+        overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
     }
 
-    public void calc() {
+    private void calc() {
         int count = objects.size();
         int maxWeight = 30;
 
@@ -88,23 +98,18 @@ public class VoyageAdderActivity extends AppCompatActivity {
         } else {
             WelcomeActivity.currentProfit = table[count][maxWeight];
 
-            ArrayList<Integer> objectIds = new ArrayList<>();
-            for (int i = count; i >= 1; i--) {
-                if (table[i][maxWeight] != table[i - 1][maxWeight]) {
-                    objectIds.add(i);
-                }
-            }
-            Collections.reverse(objectIds);
-
-            ArrayList<Object> resultObjects = new ArrayList<>();
-            for (int i = 0; i < objectIds.size(); i++) {
-                resultObjects.add(new Object(objects.get(objectIds.get(i) - 1).getName(), objects.get(objectIds.get(i) - 1).getWeight(), objects.get(objectIds.get(i) - 1).getCost()));
+            for (int i = count, j = maxWeight; i > 0; i--) {
+                if (table[i][j] == table[i - 1][j])
+                    objects.remove(i - 1);
+                else
+                    j -= objects.get(i - 1).getWeight();
             }
 
-            WelcomeActivity.currentObjects = resultObjects;
+            WelcomeActivity.currentObjects = objects;
 
             Intent intent = new Intent(this, VoyageResultActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.right_in, R.anim.left_out);
         }
     }
 }

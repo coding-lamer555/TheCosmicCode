@@ -51,12 +51,7 @@ public class ObjectArchiveActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
-        //initializeData();
         initializeAdapter();
-    }
-
-    private void initializeData() {
-
     }
 
     private void initializeAdapter() {
@@ -67,5 +62,6 @@ public class ObjectArchiveActivity extends AppCompatActivity {
     public void onBackClick(View view) {
         Intent intent = new Intent(this, VoyageArchiveActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 }

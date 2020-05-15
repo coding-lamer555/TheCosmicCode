@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.thecosmiccode.model.Object;
-import com.example.thecosmiccode.model.Voyage;
 import com.example.thecosmiccode.utils.DBVoyages;
 
 import java.util.ArrayList;
@@ -18,10 +17,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public static DBVoyages dbConnector;
     public static String currentUser;
-    public static ArrayList<Object> currentObjects = new ArrayList<>();
+    public static ArrayList<Object> currentObjects;
     public static int currentProfit;
     public static MediaPlayer player;
-    public static int currentMusicSpinnerIndex = 10;
+    public static int currentMusicSpinnerIndex = 4;
     private ConstraintLayout welcome;
 
     @Override
@@ -46,9 +45,11 @@ public class WelcomeActivity extends AppCompatActivity {
         if (currentUser == null) {
             Intent intent = new Intent(this, DescriptionActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
         } else {
             Intent intent = new Intent(this, VoyageWorkerActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
         }
     }
 

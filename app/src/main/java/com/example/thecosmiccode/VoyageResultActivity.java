@@ -46,18 +46,11 @@ public class VoyageResultActivity extends AppCompatActivity {
         stringBuilder.insert(13, " (" + WelcomeActivity.currentProfit + ")");
         result.setText(stringBuilder.toString());
 
-        //normalizeLayout();
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
         recyclerView.setHasFixedSize(true);
 
-        //initializeData();
         initializeAdapter();
-    }
-
-    private void initializeData() {
-
     }
 
     private void initializeAdapter() {
@@ -65,33 +58,15 @@ public class VoyageResultActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void normalizeLayout() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        int needHeight = height;
-        ConstraintLayout.LayoutParams topLayoutParams = (ConstraintLayout.LayoutParams) topLayout.getLayoutParams();
-        needHeight -= topLayoutParams.height;
-        ConstraintLayout.LayoutParams bottomLayoutParams = (ConstraintLayout.LayoutParams) bottomLayout.getLayoutParams();
-        needHeight -= bottomLayoutParams.height;
-        needHeight -= 16 + 16;
-        ConstraintLayout.LayoutParams recyclerViewLayoutParams = (ConstraintLayout.LayoutParams) recyclerViewLayout.getLayoutParams();
-        recyclerViewLayoutParams.height = needHeight;
-        recyclerViewLayout.setLayoutParams(recyclerViewLayoutParams);
-        ConstraintLayout.LayoutParams recyclerViewParams = (ConstraintLayout.LayoutParams) recyclerView.getLayoutParams();
-        recyclerViewParams.height = needHeight;
-        recyclerView.setLayoutParams(recyclerViewParams);
-    }
-
     public void onGoBeginClick(View view) {
         Intent intent = new Intent(this, VoyageWorkerActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 
     public void onSaveClick(View view) {
         Intent intent = new Intent(this, VoyageSavingActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 }

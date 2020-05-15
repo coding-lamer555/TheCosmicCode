@@ -22,7 +22,6 @@
     <string name="saving_description">Введите название или номер вашего рейса:</string>
     <string name="info">Над данным приложением работала команда Lamers:\n\nПроскурина\nСофья\n\nТерещенко\nСергей\n\nСвиридов\nДанил</string>
     <string name="change_user">Сменить\nпользователя:</string>
-    <string name="change">Сменить</string>
     <string name="drop_db">Удалить все данные</string>
     <string name="mute">Отключить\nмузычку</string>
     <string name="user_voyages">Рейсы пользователя</string>
@@ -37,4 +36,6 @@
     <string name="small_profit">Слишком маленькая прибыль, может поискать товар повыгоднее?</string>
     <string name="not_blank_voyage">Название (номер) рейса не может быть пустым!</string>
     <string name="change_music">Муз. фон:</string>
+    <string name="too_much_cost">Слишком высокая стоимость предмета</string>
+    <string name="no_object">Не добавлено ни одного предмета!</string>
 </resources>
